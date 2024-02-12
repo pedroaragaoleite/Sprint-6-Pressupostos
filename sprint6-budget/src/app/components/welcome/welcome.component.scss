@@ -1,0 +1,12 @@
+.navbar {
+    height: 300px;
+    margin-bottom: 120px;
+
+    &-bg {
+        background-image: url('../../assets/26310882.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        // width: 100%;
+        height: 100%;
+    }
+}

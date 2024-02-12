@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+// reset
+
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ol,
+ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+p {
+    margin-bottom: 0 !important;
+}

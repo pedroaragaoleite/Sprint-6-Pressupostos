@@ -1,0 +1,19 @@
+.services {
+    margin-top: 60px;
+    // border: 1px solid gray;
+    border-radius: 10px;
+    padding: 50px 0px;
+    -webkit-box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
+    -moz-box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
+    box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
+    max-width: 960px;
+
+    &-preu {
+        margin-top: 60px;
+        max-width: 960px;
+
+        &--heading {
+            margin-right: 50px;
+        }
+    }
+}
