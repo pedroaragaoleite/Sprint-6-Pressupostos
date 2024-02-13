@@ -1,21 +1,27 @@
-@for ( work of works; track $index) {
+@for ( product of products; track $index) {
 <div class="container-lg services">
     <div class="container d-flex align-items-center justify-content-between w-75">
         <div>
-            <h3>{{work.title}}</h3>
-            <p>{{work.description}}</p>
+            <h3>{{product.title}}</h3>
+            <p>{{product.description}}</p>
         </div>
         <div>
-            <h2><span>{{work.price}}</span>€</h2>
+            <h2><span>{{product.price}}</span>€</h2>
         </div>
         <form class="form-check" [formGroup]="formChecked">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="updateCost()" formControlName="checkbox{{$index}}">
             <label class="form-check-label" for="flexCheckDefault">
                 Afegir
             </label>
+            
         </form>
+        
         <!-- {{formChecked.value | json}} -->
     </div>
+    @if(ischecked && products[$index].title === 'Web') {
+        <app-panel></app-panel>
+    }
+    
 </div>
 }
 
