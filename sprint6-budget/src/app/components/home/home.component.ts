@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Servicios } from '../../models/servicios';
 import { BudgetService } from '../../services/budget/budget.service';
 import { ProductsService } from '../../services/products/products.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JsonPipe, NgIf } from '@angular/common';
 import { PanelComponent } from '../panel/panel.component';
 
@@ -18,60 +18,91 @@ export class HomeComponent implements OnInit {
   products: Servicios[] = [];
   selectedCheckBox: number[] = [];
   totalPrice: number = 0;
-  ischecked :any ;
+  isChecked :any ;
+  total: number = 0;
 
-  formChecked = new FormGroup({
-    checkbox0: new FormControl(false),
-    checkbox1: new FormControl(false),
-    checkbox2: new FormControl(false)
-  })
+  // formChecked = new FormGroup({
+  //   checkbox0: new FormControl(false),
+  //   checkbox1: new FormControl(false),
+  //   checkbox2: new FormControl(false)
+  // })
+
+  serviciosForm: FormGroup = new FormGroup({});
 
 
-  constructor(budgetService: BudgetService, productsService: ProductsService) {
-    this.products = productsService.products;
-    
+  constructor(budgetService: BudgetService, productsService: ProductsService, private fb: FormBuilder) {
+    this.products = productsService.products;  
+  } 
+
+  ngOnInit(): void {
+    this.serviciosForm = this.fb.group({
+      checkbox0 : false,
+      checkbox1: false,
+      checkbox2: false,
+      pagesNum: [1, [Validators.required, Validators.min(1)]],
+      languagesNum: [1, [Validators.required, Validators.min(1)]]
+    });
+
+
+    this.serviciosForm.valueChanges.subscribe(() => {
+      this.updateCost2();
+    })     
+  }
+
+  updateCost2() {
+    this.totalPrice = 0;
+    this.selectedCheckBox = [];
+
+    this.products.forEach((product, index) => {
+      if(this.serviciosForm.get(`checkbox${index}`)?.value) {
+        this.selectedCheckBox.push(product.price);
+        this.totalPrice += product.price;
+      }
+      if(this.serviciosForm.get('checkbox2')?.value) {
+        this.isChecked = true;
+      } else {
+        this.isChecked = false;
+      }
+    });
+
+    this.total = this.selectedCheckBox.reduce((acc:number, value:number) => acc + value, 0);
   }
 
  
 
-  ngOnInit(): void {
-    this.formChecked.valueChanges.subscribe(() => {
-      this.updateCost();
-    })     
-  }
 
-  updateCost() :void {
-    this.totalPrice = 0;
-    this.selectedCheckBox = [];
-    if(this.formChecked.get('checkbox0')?.value) {
-      const price = this.products[0].price;
-      this.selectedCheckBox.push(price);
-      this.totalPrice += price;
-      console.log(this.formChecked.controls?.checkbox0.value);
+//   updateCost() :void {
+//     this.totalPrice = 0;
+//     this.selectedCheckBox = [];
+//     if(this.serviciosForm.get('checkbox0')?.value) {
+//       const price = this.products[0].price;
+//       this.selectedCheckBox.push(price);
+//       this.totalPrice += price;
+//       console.log(this.serviciosForm.controls?.['checkbox0'].value);
       
-    } else {
-      console.log(this.formChecked.controls?.checkbox0.value);
-    }
+//     } else {
+//       console.log(this.serviciosForm.controls?.['checkbox0'].value);
+//     }
 
-    if(this.formChecked.get('checkbox1')?.value) {
-      const price = this.products[1].price;
-      this.selectedCheckBox.push(price);
-      this.totalPrice += price;
-    }
-    if(this.formChecked.get('checkbox2')?.value) {
-      const price = this.products[2].price;
-      this.selectedCheckBox.push(price);
-      this.totalPrice += price;
-      this.ischecked = (this.formChecked.get('checkbox2')?.value)
-      console.log(this.ischecked);
+//     if(this.serviciosForm.get('checkbox1')?.value) {
+//       const price = this.products[1].price;
+//       this.selectedCheckBox.push(price);
+//       this.totalPrice += price;
+//     }
+//     if(this.serviciosForm.get('checkbox2')?.value) {
+//       const price = this.products[2].price;
+//       this.selectedCheckBox.push(price);
+//       this.totalPrice += price;
+//       this.isChecked = (this.serviciosForm.get('checkbox2')?.value)
+//       console.log(this.isChecked);
       
-    } else {
-      this.ischecked = false;
-    }
+//     } else {
+//       this.isChecked = false;
+//     }
 
-    // this.selectedCheckBox.push(this.totalPrice)
-  console.log(this.selectedCheckBox);
+//     // this.selectedCheckBox.push(this.totalPrice)
+//   console.log(this.selectedCheckBox);
   
       
-}
+// }
 }

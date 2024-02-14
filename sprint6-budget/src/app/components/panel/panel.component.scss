@@ -1,0 +1,27 @@
+.bullet {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    border: 1px solid gray;
+    background-color: transparent;
+    color: gray;
+}
+
+.webpages, .languages{
+    margin-right: 30px;
+    h3 {
+        font-size: 14px;
+        margin-bottom: 0 !important;
+    }
+    &-info {
+        border: none;
+        background-color: transparent;
+    }
+}
+
+
+.form-input {
+    width: 50px !important;
+}
+
