@@ -20,8 +20,7 @@
     </div>
     @if(isChecked && products[$index].title === 'Web') {
         <app-panel [serviciosParentForm] = "serviciosForm"></app-panel>
-    }
-    
+    }   
 </div>
 }
 
@@ -31,5 +30,6 @@
         <h3 class="services-preu--heading">Preu pressuposat:</h3>
         <p class="services-preu--number"><span>{{total}}</span>€</p>
     </div>
-
 </div>
+
+<app-budget [dataParentForm] = "serviciosForm" (onSubmit)="onSubmit()"></app-budget>

@@ -18,6 +18,10 @@ export class PanelComponent {
 
   @Input() serviciosParentForm: FormGroup = new FormGroup({});
 
+  public get canDecrease()  {
+    return this.serviciosParentForm.controls['pagesNum'].value > 1 || this.serviciosParentForm.controls['languagesNum'].value > 1;
+  }
+
   increment(controlName: string): void {
     const controlN = this.serviciosParentForm.get(controlName);
     if(controlN) {

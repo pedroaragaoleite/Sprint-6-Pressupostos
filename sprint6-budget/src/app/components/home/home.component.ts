@@ -5,11 +5,13 @@ import { ProductsService } from '../../services/products/products.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { PanelComponent } from '../panel/panel.component';
+import { BudgetComponent } from '../budget/budget.component';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe, PanelComponent],
+  imports: [ReactiveFormsModule, JsonPipe, PanelComponent, BudgetComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -20,6 +22,10 @@ export class HomeComponent implements OnInit {
   isChecked :any ;
   total: number = 0;
   webCost: number = 0;
+  name: string = '';
+  telephone: string = '';
+  email: string = "";
+  services: string[] = [];
 
   serviciosForm: FormGroup = new FormGroup({});
   budgetService: BudgetService;
@@ -36,7 +42,10 @@ export class HomeComponent implements OnInit {
       checkbox1: false,
       checkbox2: false,
       pagesNum: [1, [Validators.required, Validators.min(1)]],
-      languagesNum: [1, [Validators.required, Validators.min(1)]]
+      languagesNum: [1, [Validators.required, Validators.min(1)]],
+      name: "",
+      telephone: "",
+      email: ""
     });
 
 
@@ -44,17 +53,17 @@ export class HomeComponent implements OnInit {
       this.updateCost();
     })     
   }
-
-
   
 
   updateCost() {
     this.total = 0;
     this.selectedCheckBox = [];
+    this.services = [];
 
     this.products.forEach((product, index) => {
       if(this.serviciosForm.get(`checkbox${index}`)?.value) {
         this.selectedCheckBox.push(product.price);
+        this.services.push(product.title)
       }     
     });
 
@@ -67,8 +76,28 @@ export class HomeComponent implements OnInit {
     } else {
       this.isChecked = false;
     }
-
+    console.log(this.selectedCheckBox);
+    console.log(this.services);
+    
+    
       
     this.total = this.selectedCheckBox.reduce((acc:number, value:number) => acc + value, 0);
+  }
+
+  onSubmit() {
+    if(this.total === 0 ) {
+      console.log("you need to select a service");
+      
+    } else {
+    
+    this.name = this.serviciosForm.get('name')?.value;
+    this.telephone = this.serviciosForm.get('telephone')?.value;
+    this.email = this.serviciosForm.get('email')?.value; 
+    console.log(this.name, this.telephone, this.email);
+       
+    }
+    
+
+    
   }
 }
