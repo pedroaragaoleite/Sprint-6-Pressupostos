@@ -2,15 +2,15 @@
     <div class="text-start w-75">
         <h3>Pressupostos en curso</h3>
     </div>
-        <form [formGroup]="dataParentForm" class="d-flex align-items-center justify-content-between w-75">    
+        <form [formGroup]="dataParentForm" class="d-flex align-items-center justify-content-between w-75 gap-2">    
             <div class="">
-            <input type="text" class="form-control w-75" id="nom" placeholder="Nom" formControlName="name">
+            <input type="text" class="form-control" id="nom" placeholder="Nom" formControlName="name">
             </div>
             <div class="">
-            <input type="tel" class="form-control w-75" id="telephone" placeholder="Teléfon" formControlName="telephone">
+            <input type="tel" class="form-control" id="telephone" placeholder="Teléfon" formControlName="telephone">
             </div>
             <div class="">
-                <input type="email" class="form-control w-75" id="email" placeholder="Email" formControlName="email">
+                <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
             </div>
             <button (click)="submitForm()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon [icon]="faArrowRight" class="contact-icon"></fa-icon></button>
         </form>
