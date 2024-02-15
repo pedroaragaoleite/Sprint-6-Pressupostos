@@ -9,7 +9,7 @@
             <h2><span>{{product.price}}</span>€</h2>
         </div>
         <form class="form-check" [formGroup]="serviciosForm">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="updateCost2()" formControlName="checkbox{{$index}}">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="updateCost()" formControlName="checkbox{{$index}}">
             <label class="form-check-label" for="flexCheckDefault">
                 Afegir
             </label>
@@ -29,7 +29,7 @@
 <div class="container-lg services-preu">
     <div class="container  d-flex  justify-content-end align-items-center">
         <h3 class="services-preu--heading">Preu pressuposat:</h3>
-        <p class="services-preu--number"><span>{{totalPrice}}</span>€</p>
+        <p class="services-preu--number"><span>{{total}}</span>€</p>
     </div>
 
 </div>

@@ -7,7 +7,11 @@ import { Injectable } from '@angular/core';
 export class BudgetService {
 
   totalWeb(pagesNumber: number, languagesNum: number):number {
-    return (pagesNumber * languagesNum) * 30
+    // console.log(pagesNumber, languagesNum);
+    const result = (pagesNumber * 30) + (languagesNum * 30);
+    console.log(result);
+    
+    return result
   } 
 
   constructor() { }

@@ -10,8 +10,8 @@
         </div>
         <div class="webpages-input  d-flex gap-3 justify-content-end align-items-center">
             <button class="bullet" type="button" (click)="increment('pagesNum')">+</button>
-            <input type="number" class="form-control w-25 form-input" placeholder="1" min="1" formControlName="pagesNum">
-            <button class="bullet" type="button" (click)="decrease('pagesNum')">-</button>
+            <input readonly type="number" class="form-control w-25 form-input" placeholder="1" min="1" formControlName="pagesNum">            
+                <button [disabled]="serviciosParentForm.get('pagesNum')?.value === 1"  class="bullet" type="button" (click)="decrease('pagesNum')">-</button>    
           </div>
     </form>
 </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="languages-input  d-flex gap-3 justify-content-end align-items-center">
             <button class="bullet" type="button" (click)="increment('languagesNum')">+</button>
-            <input type="number" class="form-control form-input w-25" placeholder="1" min="1" formControlName="languagesNum">
+            <input readonly ="number" class="form-control form-input w-25" placeholder="1" min="1" formControlName="languagesNum">
             <button class="bullet" type="button" (click)="decrease('languagesNum')">-</button>
           </div>
     </form>
