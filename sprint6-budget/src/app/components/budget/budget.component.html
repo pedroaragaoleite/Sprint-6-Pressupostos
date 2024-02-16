@@ -1,22 +1,83 @@
 <div class="container-lg contact d-flex align-items-center flex-column">
     <div class="text-start w-75">
-        <h3>Pressupostos en curso</h3>
+        <h3>Demanar pressupost</h3>
     </div>
-        <form [formGroup]="dataParentForm" class="d-flex align-items-center justify-content-between w-75 gap-2">    
-            <div class="">
+    <form [formGroup]="dataParentForm" class="d-flex align-items-center justify-content-between w-75 gap-2">
+        <div class="">
             <input type="text" class="form-control" id="nom" placeholder="Nom" formControlName="name">
-            </div>
-            <div class="">
+
+            @if(dataParentForm.get('name')?.errors?.['required'] && dataParentForm.get('name')?.touched) {
+            <span>Name is required</span>
+            }
+
+
+        </div>
+        <div class="">
             <input type="tel" class="form-control" id="telephone" placeholder="Teléfon" formControlName="telephone">
-            </div>
-            <div class="">
-                <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
-            </div>
-            <button (click)="submitForm()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon [icon]="faArrowRight" class="contact-icon"></fa-icon></button>
-        </form>
-    
+            @if(dataParentForm.get('telephone')?.errors?.['required'] && dataParentForm.get('telephone')?.touched) {
+            <span>Telephone is required</span>
+            }
+        </div>
+        <div class="">
+            <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+            @if(dataParentForm.get('email')?.errors?.['required'] && dataParentForm.get('email')?.touched) {
+            <span>Email is required</span>
+            }
+            @if(dataParentForm.get('email')?.errors?.['email'] && dataParentForm.get('email')?.touched) {
+            <span>Please enter a valid email address</span>
+            }
+            <!-- <div *ngIf="dataParentForm.get('email')?.errors?.['required']">
+                <span>Email is required</span>
+            </div> -->
+        </div>
+        <button (click)="submitForm()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon
+                [icon]="faArrowRight" class="contact-icon"></fa-icon></button>
+    </form>
+    @if((submitted && dataParentForm.get('name')?.value === "") || (submitted && dataParentForm.get('email')?.value ===
+    "")|| (submitted && dataParentForm.get('telephone')?.value === "")) {
+    <span>Please complete all fields...</span>
+    }
 </div>
 
-<div class="container-lg budgetList">
-    <h3>Pressupostos en curso</h3>
+<div class="container-lg budgetList d-flex flex-column">
+    <div class="d-flex">
+        <h3>Pressupostos en curso</h3>
+        <div class="budgetList-menu d-flex">
+            <div class="budgetList-search">
+                <input type="text" placeholder="Search">
+            </div>
+            <div>
+                <button>Data</button>
+                <button>Import</button>
+                <button>Nom</button>
+            </div>
+        </div>
+    </div>
+    @for(client of clients; track $index) {
+    <div class="budgetList-clients d-flex container justify-content-between">
+        <div class="container d-flex justify-content-between w-75">
+            <div>
+                <h4>{{client.name}}</h4>
+                <span>{{client.email}}</span>
+                <span>{{client.telephone}}</span>
+            </div>
+            <div>
+                <h4>Serveis contractats</h4>
+                <ul>
+                    @for(service of client.services; track $index) {
+                    <li>{{service}}</li>
+                    @if(service === "Web") {
+                    <li>{{service}}</li>
+                    }
+                    }
+                </ul>
+            </div>
+            <div>
+                <h4>Total</h4>
+                <span>{{client.total}}€</span>
+            </div>
+        </div>
+    </div>
+    }
+
 </div>
