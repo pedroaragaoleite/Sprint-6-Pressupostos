@@ -28,6 +28,7 @@
 @if(submitted && total === 0) {
 <span>You need to choose one service at last!</span>
 }
+
 <div class="container-lg services-preu">
     <div class="container  d-flex  justify-content-end align-items-center">
         <h3 class="services-preu--heading">Preu pressuposat:</h3>
@@ -35,5 +36,44 @@
     </div>
 </div>
 
-<app-budget [clients]="clients" [submitted]="submitted" [dataParentForm]="serviciosForm"
-    (onSubmit)="onSubmit()"></app-budget>
+<div class="container-lg contact d-flex align-items-center flex-column">
+    <div class="text-start w-75">
+        <h3>Demanar pressupost</h3>
+    </div>
+    <form [formGroup]="serviciosForm" class="d-flex align-items-center justify-content-between w-75 gap-2">
+        <div class="">
+            <input type="text" class="form-control" id="nom" placeholder="Nom" formControlName="name">
+
+            @if(serviciosForm.get('name')?.errors?.['required'] && serviciosForm.get('name')?.touched) {
+            <span>Name is required</span>
+            }
+
+
+        </div>
+        <div class="">
+            <input type="tel" class="form-control" id="telephone" placeholder="Teléfon" formControlName="telephone">
+            @if(serviciosForm.get('telephone')?.errors?.['required'] && serviciosForm.get('telephone')?.touched) {
+            <span>Telephone is required</span>
+            }
+        </div>
+        <div class="">
+            <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+            @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched) {
+            <span>Email is required</span>
+            }
+            @if(serviciosForm.get('email')?.errors?.['email'] && serviciosForm.get('email')?.touched) {
+            <span>Please enter a valid email address</span>
+            }
+        </div>
+        <button (click)="onSubmit()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon
+                [icon]="faArrowRight" class="contact-icon"></fa-icon></button>
+    </form>
+    @if((submitted && serviciosForm.get('name')?.value === "") || (submitted && serviciosForm.get('email')?.value ===
+    "")|| (submitted && serviciosForm.get('telephone')?.value === "")) {
+    <span>Please complete all fields...</span>
+    }
+</div>
+
+@if(clients.length > 0) {
+<app-budget [clients]="clients"></app-budget>
+}

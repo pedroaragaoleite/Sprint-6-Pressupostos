@@ -7,17 +7,19 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { JsonPipe } from '@angular/common';
 import { PanelComponent } from '../panel/panel.component';
 import { BudgetComponent } from '../budget/budget.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe, PanelComponent, BudgetComponent],
+  imports: [ReactiveFormsModule, JsonPipe, PanelComponent, BudgetComponent, FontAwesomeModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-
+  faArrowRight = faArrowRight;
   products: Servicios[] = [];
   clients: Client[] = []
   selectedCheckBox: number[] = [];
@@ -96,13 +98,22 @@ export class HomeComponent implements OnInit {
       }
 
       this.clients.push(newClient);
+      this.forceReset();
 
-      this.serviciosForm.reset();
       this.submitted = false;
-
-    } else {
-      console.log("something wrong ")
-
     }
+  }
+
+  forceReset(): void {
+    this.serviciosForm.reset({
+      checkbox0: false,
+      checkbox1: false,
+      checkbox2: false,
+      pagesNum: 1,
+      languagesNum: 1,
+      name: "",
+      telephone: "",
+      email: ""
+    })
   }
 }
