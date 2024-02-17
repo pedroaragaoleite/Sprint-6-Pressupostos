@@ -15,14 +15,36 @@ import { Client } from '../../models/clients';
 })
 export class BudgetComponent {
   faArrowRight = faArrowRight;
+  isSorted: boolean = false;
   @Input() dataParentForm: FormGroup = new FormGroup({});
   @Input() submitted: any;
   @Input() clients: Client[] = [];
   @Output() onSubmit = new EventEmitter<void>();
+  // @Output() sortNom = new EventEmitter<void>();
 
   submitForm() {
     this.onSubmit.emit();
   }
 
-  // @Output();
+  sortNom(): void {
+    // this.sortNom.emit();
+    // this.clients.sort((a: any, b: any) => a - b);
+    // console.log(this.clients);
+    this.clients.sort((a, b) => a.name.localeCompare(b.name));
+    console.log(this.clients);
+  }
+
+  sortPreu(): void {
+    // this.isSorted = true;
+    if (!this.isSorted) {
+      this.clients.sort((a, b) => a.total - b.total)
+      this.isSorted = true;
+    } else if (this.isSorted) {
+      this.clients.reverse();
+    }
+  }
+
+  sortDate(): void {
+    this.clients.sort((a: any, b: any) => a.formDate - b.formDate);
+  }
 }

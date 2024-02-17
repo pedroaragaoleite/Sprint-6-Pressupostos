@@ -47,27 +47,28 @@
                 <input type="text" placeholder="Search">
             </div>
             <div>
-                <button>Data</button>
-                <button>Import</button>
-                <button>Nom</button>
+                <button (click)="sortDate()">Data</button>
+                <button (click)="sortPreu()">Import</button>
+                <button (click)="sortNom()">Nom</button>
             </div>
         </div>
     </div>
     @for(client of clients; track $index) {
     <div class="budgetList-clients d-flex container justify-content-between">
         <div class="container d-flex justify-content-between w-75">
-            <div>
+            <div class="d-flex flex-column">
                 <h4>{{client.name}}</h4>
                 <span>{{client.email}}</span>
                 <span>{{client.telephone}}</span>
             </div>
             <div>
                 <h4>Serveis contractats</h4>
-                <ul>
+                <ul class="d-flex flex-column">
                     @for(service of client.services; track $index) {
+                    @if(service !== "Web") {
                     <li>{{service}}</li>
-                    @if(service === "Web") {
-                    <li>{{service}}</li>
+                    } @else {
+                    <li>{{service}} ({{client.nPages}} pàginas, {{client.nLanguages}} llenguatges)</li>
                     }
                     }
                 </ul>

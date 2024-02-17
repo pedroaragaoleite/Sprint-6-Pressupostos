@@ -21,14 +21,15 @@ export class HomeComponent implements OnInit {
   products: Servicios[] = [];
   clients: Client[] = []
   selectedCheckBox: number[] = [];
-  isChecked: any;
+  isChecked: boolean = false;
   total: number = 0;
   webCost: number = 0;
   name: string = '';
   telephone: string = '';
   email: string = "";
-  services: any[] = [];
+  services: string[] = [];
   submitted: boolean = false;
+  setDate: Date = new Date();
 
   serviciosForm: FormGroup = new FormGroup({});
   budgetService: BudgetService;
@@ -98,6 +99,7 @@ export class HomeComponent implements OnInit {
 
 
     } else if (this.serviciosForm.valid) {
+      this.setDate = new Date();
       this.name = this.serviciosForm.get('name')?.value;
       this.telephone = this.serviciosForm.get('telephone')?.value;
       this.email = this.serviciosForm.get('email')?.value;
@@ -108,6 +110,9 @@ export class HomeComponent implements OnInit {
         email: this.email,
         total: this.total,
         services: this.services,
+        nPages: this.serviciosForm.value.pagesNum,
+        nLanguages: this.serviciosForm.value.languagesNum,
+        formDate: this.setDate
       }
 
       this.clients.push(newClient);
@@ -115,8 +120,6 @@ export class HomeComponent implements OnInit {
 
     } else {
       console.log("submited");
-
-
     }
   }
 }
