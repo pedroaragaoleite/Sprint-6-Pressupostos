@@ -17,9 +17,10 @@ export class BudgetComponent {
   faArrowRight = faArrowRight;
   isSorted: boolean = false;
   @Input() dataParentForm: FormGroup = new FormGroup({});
-  @Input() submitted: any;
+  @Input() submitted: boolean = false;
   @Input() clients: Client[] = [];
   @Output() onSubmit = new EventEmitter<void>();
+
   // @Output() sortNom = new EventEmitter<void>();
 
   submitForm() {
@@ -41,10 +42,12 @@ export class BudgetComponent {
       this.isSorted = true;
     } else if (this.isSorted) {
       this.clients.reverse();
+      console.log(this.clients);
+
     }
   }
 
   sortDate(): void {
-    this.clients.sort((a: any, b: any) => a.formDate - b.formDate);
+    this.clients.sort((a: any, b: any) => a.formDate.getTime() - b.formDate.getTime());
   }
 }

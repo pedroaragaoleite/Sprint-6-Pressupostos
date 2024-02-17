@@ -6,13 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class BudgetService {
 
-  totalWeb(pagesNumber: number, languagesNum: number):number {
-    // console.log(pagesNumber, languagesNum);
+  totalWeb(pagesNumber: number, languagesNum: number): number {
     const result = (pagesNumber * 30) + (languagesNum * 30);
     console.log(result);
-    
+
     return result
-  } 
+  }
 
   constructor() { }
 }

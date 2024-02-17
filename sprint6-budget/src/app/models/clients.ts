@@ -6,5 +6,5 @@ export interface Client {
     total: number;
     nPages?: number;
     nLanguages?: number;
-    formDate: Date;
+    formDate?: Date;
 }
