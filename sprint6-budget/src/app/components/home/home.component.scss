@@ -7,6 +7,7 @@
     -moz-box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
     box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
     max-width: 960px;
+    font-weight: bold;
 
     &-preu {
         margin-top: 60px;
@@ -15,5 +16,35 @@
         &--heading {
             margin-right: 50px;
         }
+    }
+
+    &-contact {
+        margin-top: 60px;
+        margin-bottom: 60px;
+        border-radius: 10px;
+        padding: 40px 0px;
+        -webkit-box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
+        -moz-box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
+        box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
+        max-width: 960px;
+
+        h3 {
+            padding-bottom: 20px;
+        }
+    }
+
+}
+
+.contact {
+    &-btn {
+        font-size: 12px;
+    }
+
+    &-icon {
+        font-size: 10px;
+    }
+
+    input {
+        width: 150px;
     }
 }

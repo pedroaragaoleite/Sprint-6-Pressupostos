@@ -6,12 +6,12 @@
             <p>{{product.description}}</p>
         </div>
         <div>
-            <h2><span>{{product.price}}</span>€</h2>
+            <p class="font-24">{{product.price}}<span class="font-16">€</span></p>
         </div>
         <form class="form-check" [formGroup]="serviciosForm">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" (change)="updateCost()"
                 formControlName="checkbox{{$index}}">
-            <label class="form-check-label" for="flexCheckDefault">
+            <label class="form-check-label font-14" for="flexCheckDefault">
                 Afegir
             </label>
 
@@ -22,12 +22,14 @@
     @if(isChecked && products[$index].title === 'Web') {
     <app-panel [serviciosParentForm]="serviciosForm"></app-panel>
     }
+
+    @if(submitted && total === 0) {
+    <p [class.invalid]="total === 0" class="invalid w-75">You need to choose one service at least!</p>
+    }
 </div>
 }
 
-@if(submitted && total === 0) {
-<span>You need to choose one service at last!</span>
-}
+
 
 <div class="container-lg services-preu">
     <div class="container  d-flex  justify-content-end align-items-center">
@@ -36,33 +38,30 @@
     </div>
 </div>
 
-<div class="container-lg contact d-flex align-items-center flex-column">
+<div class="container-lg contact d-flex align-items-center flex-column services-contact">
     <div class="text-start w-75">
         <h3>Demanar pressupost</h3>
     </div>
-    <form [formGroup]="serviciosForm" class="d-flex align-items-center justify-content-between w-75 gap-2">
+    <form [formGroup]="serviciosForm" class="d-flex align-items-center justify-content-between w-75 gap-2 form-contact">
         <div class="">
             <input type="text" class="form-control" id="nom" placeholder="Nom" formControlName="name">
-
             @if(serviciosForm.get('name')?.errors?.['required'] && serviciosForm.get('name')?.touched) {
-            <span>Name is required</span>
+            <p class="contact-invalid input-validation" [class.visibility]="!serviciosForm.valid">Name is required</p>
             }
-
-
         </div>
         <div class="">
             <input type="tel" class="form-control" id="telephone" placeholder="Teléfon" formControlName="telephone">
             @if(serviciosForm.get('telephone')?.errors?.['required'] && serviciosForm.get('telephone')?.touched) {
-            <span>Telephone is required</span>
+            <p class="contact-invalid">Telephone is required</p>
             }
         </div>
         <div class="">
             <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
             @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched) {
-            <span>Email is required</span>
+            <p class="contact-invalid ">Email is required</p>
             }
             @if(serviciosForm.get('email')?.errors?.['email'] && serviciosForm.get('email')?.touched) {
-            <span>Please enter a valid email address</span>
+            <p class="contact-invalid input-validation">Please enter a valid email address</p>
             }
         </div>
         <button (click)="onSubmit()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon
@@ -70,10 +69,12 @@
     </form>
     @if((submitted && serviciosForm.get('name')?.value === "") || (submitted && serviciosForm.get('email')?.value ===
     "")|| (submitted && serviciosForm.get('telephone')?.value === "")) {
-    <span>Please complete all fields...</span>
+    <p class="contact-invalid">Please complete all fields...</p>
     }
 </div>
 
-@if(clients.length > 0) {
+
+@if(clients.length == 0) {
+<div class="container border-line w-75"></div>
 <app-budget [clients]="clients"></app-budget>
 }

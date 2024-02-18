@@ -9,17 +9,7 @@
     max-width: 960px;
     margin-bottom: 60px;
 
-    &-btn {
-        font-size: 12px;
-    }
 
-    &-icon {
-        font-size: 10px;
-    }
-
-    input {
-        width: 150px;
-    }
 }
 
 
@@ -33,4 +23,9 @@
     box-shadow: 0px 5px 20px 0px rgba(207, 207, 207, 1);
     max-width: 960px;
     margin-bottom: 60px;
+}
+
+.budgetList-btn {
+    background-color: transparent;
+    border: none;
 }

@@ -27,3 +27,64 @@ img {
 p {
     margin-bottom: 0 !important;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0 !important;
+}
+
+.font-24 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.font-16 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.border-line {
+    border-bottom: 1px dashed gray;
+    margin: 50px auto;
+}
+
+.invalid {
+    color: red;
+    // padding-top: 20px;
+    font-weight: 400;
+    // margin-top: 20px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.container,
+.container-lg {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.contact-invalid {
+    color: red;
+    font-size: 10px;
+    padding-top: 20px;
+}
+
+// .input-validation {
+//     display: none;
+// }
+
+// .visibility {
+//     display: block;
+// }
+
+// .form-contact {
+//     height: 100px;
+// }
