@@ -1,3 +1,5 @@
+<app-welcome></app-welcome>
+
 @for ( product of products; track $index) {
 <div class="container-lg services">
     <div class="container d-flex align-items-center justify-content-between px-5">
@@ -62,15 +64,18 @@
         </div>
         <div class="">
             <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
-            @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched) {
+            <!-- @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched) {
             <p class="contact-invalid ">L'Email és necessari</p>
-            }
-            @if(serviciosForm.get('email')?.errors?.['emailInvalid'] && serviciosForm.get('email')?.touched) {
+            } -->
+            @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched ||
+            serviciosForm.get('email')?.errors?.['emailInvalid']
+            && serviciosForm.get('email')?.touched) {
             <p class="contact-invalid input-validation">L'Email no és vàlid</p>
             }
         </div>
-        <button (click)="onSubmit()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon
-                [icon]="faArrowRight" class="contact-icon"></fa-icon></button>
+        <button (click)="onSubmit()" [disabled]="!serviciosForm.valid" type="submit"
+            class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon [icon]="faArrowRight"
+                class="contact-icon"></fa-icon></button>
     </form>
     @if((submitted && serviciosForm.get('name')?.value === "") || (submitted && serviciosForm.get('email')?.value ===
     "")|| (submitted && serviciosForm.get('telephone')?.value === "")) {
@@ -80,6 +85,6 @@
 
 
 @if(clients.length > 0) {
-<div class="container-lg border-line px-5"></div>
+
 <app-budget [clients]="clients"></app-budget>
 }

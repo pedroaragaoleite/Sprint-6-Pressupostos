@@ -10,8 +10,8 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HomeComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +20,20 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should return a number', () => {
+    expect(typeof component.total).toBe('number')
+  });
+  it('should not return NaN', () => {
+    expect(typeof component.total).not.toBeNaN();
+  });
+  it('should return a number', () => {
+    expect(typeof component.webCost).toBe('number')
+  });
+  it('should not return NaN', () => {
+    expect(typeof component.webCost).not.toBeNaN();
+  });
+  it('should not return NaN', () => {
+    expect(typeof component.updateCost()).not.toBeNaN();
+  });
+
 });

@@ -3,19 +3,21 @@ import { Servicios } from '../../models/servicios';
 import { BudgetService } from '../../services/budget/budget.service';
 import { ProductsService } from '../../services/products/products.service';
 import { Client } from '../../models/clients';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { PanelComponent } from '../panel/panel.component';
 import { BudgetComponent } from '../budget/budget.component';
+import { WelcomeComponent } from '../welcome/welcome.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { telephoneValidator, emailValidator } from '../../validators/custom.validator';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe, PanelComponent, BudgetComponent, FontAwesomeModule],
+  imports: [ReactiveFormsModule, JsonPipe, PanelComponent, BudgetComponent, FontAwesomeModule, WelcomeComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -46,12 +48,13 @@ export class HomeComponent implements OnInit {
   });
   invalid: any;
 
-  constructor(budgetService: BudgetService, productsService: ProductsService, private fb: FormBuilder) {
+  constructor(budgetService: BudgetService, productsService: ProductsService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
     this.products = productsService.products;
     this.budgetService = budgetService;
   }
 
   ngOnInit(): void {
+
     this.serviciosForm.valueChanges.subscribe(() => {
       this.updateCost();
     })
@@ -79,7 +82,7 @@ export class HomeComponent implements OnInit {
     }
 
     this.total = this.selectedCheckBox.reduce((acc: number, value: number) => acc + value, 0);
-
+    this.routerParams();
   }
 
   onSubmit() {
@@ -102,6 +105,7 @@ export class HomeComponent implements OnInit {
       this.clients.push(newClient);
       this.forceReset();
 
+
       this.submitted = false;
     }
   }
@@ -117,5 +121,25 @@ export class HomeComponent implements OnInit {
       telephone: "",
       email: ""
     })
+  }
+
+  routerParams(): void {
+
+    let seoParam: boolean = this.serviciosForm.get('checkbox0')?.value || false;
+    let webParam: boolean = this.serviciosForm.get('checkbox1')?.value || false;
+    let adsParam: boolean = this.serviciosForm.get('checkbox2')?.value || false;
+    let pagesParam: number = this.serviciosForm.value.pagesNum || 0;
+    let langParam: number = this.serviciosForm.value.languagesNum || 0;
+
+
+    this.router.navigate(['/home'], {
+      queryParams: {
+        seo: seoParam,
+        web: webParam,
+        ads: adsParam,
+        pages: pagesParam,
+        lang: langParam
+      }
+    });
   }
 }

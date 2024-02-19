@@ -1,7 +1,8 @@
+<div class="container-lg border-line px-5"></div>
 <div class="container-lg budgetList d-flex flex-column">
     <div class="d-flex container-lg justify-content-between flex-column budgetList-menus px-5">
         <h3>Pressupostos en curso</h3>
-        <div class="budgetList-menu d-flex justify-content-end">
+        <div class="budgetList-menu d-flex justify-content-end container-lg">
             <div class="budgetList-search me-3">
                 <button class="budgetList-icon" (click)="search(searchValue.value)"><fa-icon [icon]="faMagnifyingGlass"
                         class="budgetList-search_icon"></fa-icon></button>
@@ -9,8 +10,8 @@
             </div>
             <div class="d-flex  gap-3">
                 <button class="budgetList-btn" (click)="sortDate()">Data</button>
-                <button class="budgetList-btn" (click)="sortPreu()">Import</button>
-                <button class="budgetList-btn" (click)="sortNom()">Nom</button>
+                <button class="budgetList-btn" (click)="sortPrice()">Import</button>
+                <button class="budgetList-btn" (click)="sortName()">Nom</button>
             </div>
         </div>
     </div>

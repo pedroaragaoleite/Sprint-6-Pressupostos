@@ -21,28 +21,32 @@ export class BudgetComponent {
 
 
   faMagnifyingGlass = faMagnifyingGlass;
-  sortNom(): void {
+  sortName(): void {
     this.clients.sort((a, b) => a.name.localeCompare(b.name));
+    this.clientsSearch.sort((a, b) => a.name.localeCompare(b.name));
     console.log(this.clients);
   }
 
-  sortPreu(): void {
+  sortPrice(): void {
     if (!this.isSorted) {
       this.clients.sort((a, b) => a.total - b.total)
+      this.clientsSearch.sort((a, b) => a.total - b.total)
       this.isSorted = true;
     } else if (this.isSorted) {
       this.clients.reverse();
+      this.clientsSearch.reverse();
       console.log(this.clients);
       this.isSorted = false;
 
     }
   }
+
   sortDate(): void {
     this.clients.sort((a: any, b: any) => a.formDate.getTime() - b.formDate.getTime());
   }
   search(value: string): void {
-    console.log(value);
+
     this.clientsSearch = this.clients.filter((name) => name.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
-    console.log(this.clientsSearch);
+
   }
 }
