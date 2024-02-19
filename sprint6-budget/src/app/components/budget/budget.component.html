@@ -15,8 +15,8 @@
             </div>
         </div>
     </div>
-    @if(clientsSearch.length == 0 && searchValue.value == "") {
-    @for(client of clients; track $index) {
+    <!-- @if( ? clients : clientsSearch) { -->
+    @for(client of (clientsSearch.length == 0 && searchValue.value == "" ? clients : clientsSearch); track $index ){
     <div class="budgetList-clients d-flex container-lg justify-content-between">
         <div class="container-lg d-flex justify-content-between px-5">
             <div class="d-flex flex-column">
@@ -46,7 +46,8 @@
         </div>
     </div>
     }
-    } @else {
+    <!-- } -->
+    <!-- } @else {
     @for(client of clientsSearch; track $index) {
     <div class="budgetList-clients d-flex container-lg justify-content-between">
         <div class="container-lg d-flex justify-content-between px-5">
@@ -77,5 +78,6 @@
         </div>
     </div>
     }
-    }
-</div>
+    } -->
+
+    <!-- </div> -->
