@@ -16,6 +16,10 @@ export class BudgetComponent {
   isSorted: boolean = false;
   @Input() clients: Client[] = [];
 
+  clientsSearch: Client[] = [];
+
+
+
   faMagnifyingGlass = faMagnifyingGlass;
   sortNom(): void {
     this.clients.sort((a, b) => a.name.localeCompare(b.name));
@@ -29,10 +33,16 @@ export class BudgetComponent {
     } else if (this.isSorted) {
       this.clients.reverse();
       console.log(this.clients);
+      this.isSorted = false;
 
     }
   }
   sortDate(): void {
     this.clients.sort((a: any, b: any) => a.formDate.getTime() - b.formDate.getTime());
+  }
+  search(value: string): void {
+    console.log(value);
+    this.clientsSearch = this.clients.filter((name) => name.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
+    console.log(this.clientsSearch);
   }
 }

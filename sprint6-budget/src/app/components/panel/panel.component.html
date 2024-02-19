@@ -1,35 +1,38 @@
-<div class="container mt-3">
+<div class="container mt-3 px-5">
     <div class="container d-flex justify-content-end align-items-center">
-    <form [formGroup]="serviciosParentForm" class="d-flex align-items-center justify-content-end">
-        <div class="webpages d-flex align-items-center">
-            <button type="button" class="webpages-info" data-bs-toggle="modal" data-bs-target="#webpagesModal">
-                <span><fa-icon [icon]="faCircleExclamation" class="me-3"></fa-icon></span>
-              </button>
-            
-            <h3 class="text-end">Número de pàgines</h3>
-        </div>
-        <div class="webpages-input  d-flex gap-3 justify-content-end align-items-center">
-            <button class="bullet" type="button" (click)="increment('pagesNum')">+</button>
-            <input readonly type="number" class="form-control w-25 form-input" placeholder="1" min="1" formControlName="pagesNum">            
-                <button [disabled]="!canDecrease"  class="bullet" type="button" (click)="decrease('pagesNum')">-</button>    
-          </div>
-    </form>
-</div>
-<div class="container d-flex justify-content-end align-items-center">
-    <form [formGroup]="serviciosParentForm" class="d-flex align-items-center justify-content-end">
-        <div class="languages d-flex align-items-center">
-            <button type="button" class="languages-info" data-bs-toggle="modal" data-bs-target="#languagesModal">
-                <span><fa-icon [icon]="faCircleExclamation" class="me-3"></fa-icon></span>
-              </button>
-            <h3 class="text-end">Número de llenguatges</h3>
-        </div>
-        <div class="languages-input  d-flex gap-3 justify-content-end align-items-center">
-            <button class="bullet" type="button" (click)="increment('languagesNum')">+</button>
-            <input readonly ="number" class="form-control form-input w-25" placeholder="1" min="1" formControlName="languagesNum">
-            <button [disabled]="!canDecrease" class="bullet" type="button" (click)="decrease('languagesNum')">-</button>
-          </div>
-    </form>
-</div>
+        <form [formGroup]="serviciosParentForm" class="d-flex align-items-center justify-content-end">
+            <div class="webpages d-flex align-items-center">
+                <button type="button" class="webpages-info" data-bs-toggle="modal" data-bs-target="#webpagesModal">
+                    <span><fa-icon [icon]="faCircleExclamation" class="me-3"></fa-icon></span>
+                </button>
+
+                <h3 class="text-end">Número de pàgines</h3>
+            </div>
+            <div class="webpages-input  d-flex gap-3 justify-content-end align-items-center">
+                <button class="bullet" type="button" (click)="increment('pagesNum')">+</button>
+                <input readonly type="number" class="form-control w-25 form-input" placeholder="1" min="1"
+                    formControlName="pagesNum">
+                <button [disabled]="!canDecrease" class="bullet" type="button" (click)="decrease('pagesNum')">-</button>
+            </div>
+        </form>
+    </div>
+    <div class="container d-flex justify-content-end align-items-center">
+        <form [formGroup]="serviciosParentForm" class="d-flex align-items-center justify-content-end">
+            <div class="languages d-flex align-items-center">
+                <button type="button" class="languages-info" data-bs-toggle="modal" data-bs-target="#languagesModal">
+                    <span><fa-icon [icon]="faCircleExclamation" class="me-3"></fa-icon></span>
+                </button>
+                <h3 class="text-end">Número de llenguatges</h3>
+            </div>
+            <div class="languages-input  d-flex gap-3 justify-content-end align-items-center">
+                <button class="bullet" type="button" (click)="increment('languagesNum')">+</button>
+                <input readonly="number" class="form-control form-input w-25" placeholder="1" min="1"
+                    formControlName="languagesNum">
+                <button [disabled]="!canDecrease" class="bullet" type="button"
+                    (click)="decrease('languagesNum')">-</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <app-modal></app-modal>

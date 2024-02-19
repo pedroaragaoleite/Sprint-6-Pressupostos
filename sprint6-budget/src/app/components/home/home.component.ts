@@ -9,6 +9,7 @@ import { PanelComponent } from '../panel/panel.component';
 import { BudgetComponent } from '../budget/budget.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { telephoneValidator, emailValidator } from '../../validators/custom.validator';
 
 
 @Component({
@@ -40,9 +41,10 @@ export class HomeComponent implements OnInit {
     pagesNum: [1, [Validators.required, Validators.min(1)]],
     languagesNum: [1, [Validators.required, Validators.min(1)]],
     name: ["", [Validators.required]],
-    telephone: ["", [Validators.required]],
-    email: ["", [Validators.required, Validators.email]]
+    telephone: ["", [Validators.required, telephoneValidator()]],
+    email: ["", [Validators.required, Validators.email, emailValidator()]]
   });
+  invalid: any;
 
   constructor(budgetService: BudgetService, productsService: ProductsService, private fb: FormBuilder) {
     this.products = productsService.products;

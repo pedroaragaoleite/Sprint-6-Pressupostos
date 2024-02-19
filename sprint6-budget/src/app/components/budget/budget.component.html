@@ -1,44 +1,80 @@
-<div class="container-lg budgetList d-flex flex-column w-75">
-    <div class="d-flex justify-content-between">
+<div class="container-lg budgetList d-flex flex-column">
+    <div class="d-flex container-lg justify-content-between flex-column budgetList-menus px-5">
         <h3>Pressupostos en curso</h3>
-        <div class="budgetList-menu d-flex">
+        <div class="budgetList-menu d-flex justify-content-end">
             <div class="budgetList-search me-3">
-                <input type="text" placeholder="Search">
-                <fa-icon [icon]="faMagnifyingGlass" class="contact-icon"></fa-icon>
+                <button class="budgetList-icon" (click)="search(searchValue.value)"><fa-icon [icon]="faMagnifyingGlass"
+                        class="budgetList-search_icon"></fa-icon></button>
+                <input #searchValue class="budgetList-input_search" type="text" placeholder="Cercar...">
             </div>
-            <div class="d-flex gap-3">
+            <div class="d-flex  gap-3">
                 <button class="budgetList-btn" (click)="sortDate()">Data</button>
                 <button class="budgetList-btn" (click)="sortPreu()">Import</button>
                 <button class="budgetList-btn" (click)="sortNom()">Nom</button>
             </div>
         </div>
     </div>
+    @if(clientsSearch.length == 0 && searchValue.value == "") {
     @for(client of clients; track $index) {
-    <div class="budgetList-clients d-flex container justify-content-between">
-        <div class="container d-flex justify-content-between w-75">
+    <div class="budgetList-clients d-flex container-lg justify-content-between">
+        <div class="container-lg d-flex justify-content-between px-5">
             <div class="d-flex flex-column">
-                <h4>{{client.name}}</h4>
-                <span>{{client.email}}</span>
-                <span>{{client.telephone}}</span>
+                <h4 class="">{{client.name}}</h4>
+                <span class="font-14 color-gray">{{client.email}}</span>
+                <span class="font-14 color-gray">{{client.telephone}}</span>
             </div>
-            <div>
-                <h4>Serveis contractats</h4>
+            <div class="d-flex flex-column budgetList-clients_left">
+                <h4 class="font-14 fw-bold text-start">Serveis contractats</h4>
                 <ul class="d-flex flex-column">
                     @for(service of client.services; track $index) {
                     @if(service !== "Web") {
-                    <li>{{service}}</li>
+                    <li class="font-14 fw-bold  text-start ms-3">{{service}}</li>
                     } @else {
-                    <li>{{service}} ({{client.nPages}} pàginas, {{client.nLanguages}} llenguatges)</li>
+                    <li class="font-14 fw-bold  text-start ms-3">{{service}} ({{client.nPages}} pàginas,
+                        {{client.nLanguages}}
+                        llenguatges)
+                    </li>
                     }
                     }
                 </ul>
             </div>
             <div>
-                <h4>Total</h4>
-                <span>{{client.total}}€</span>
+                <h4 class="font-14 color-gray">Total:</h4>
+                <span class="fs-3 fw-bold">{{client.total}}€</span>
             </div>
         </div>
     </div>
     }
-
+    } @else {
+    @for(client of clientsSearch; track $index) {
+    <div class="budgetList-clients d-flex container-lg justify-content-between">
+        <div class="container-lg d-flex justify-content-between px-5">
+            <div class="d-flex flex-column">
+                <h4 class="">{{client.name}}</h4>
+                <span class="font-14 color-gray">{{client.email}}</span>
+                <span class="font-14 color-gray">{{client.telephone}}</span>
+            </div>
+            <div class="d-flex flex-column budgetList-clients_left">
+                <h4 class="font-14 fw-bold text-start">Serveis contractats</h4>
+                <ul class="d-flex flex-column">
+                    @for(service of client.services; track $index) {
+                    @if(service !== "Web") {
+                    <li class="font-14 fw-bold  text-start ms-3">{{service}}</li>
+                    } @else {
+                    <li class="font-14 fw-bold  text-start ms-3">{{service}} ({{client.nPages}} pàginas,
+                        {{client.nLanguages}}
+                        llenguatges)
+                    </li>
+                    }
+                    }
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-14 color-gray">Total:</h4>
+                <span class="fs-3 fw-bold">{{client.total}}€</span>
+            </div>
+        </div>
+    </div>
+    }
+    }
 </div>

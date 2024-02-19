@@ -8,12 +8,11 @@
     box-sizing: border-box;
 }
 
-ol,
 ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
+    margin-bottom: 0 !important;
+    padding-left: 0 !important;
 }
+
 
 a {
     text-decoration: none;
@@ -75,6 +74,10 @@ h6 {
     color: red;
     font-size: 10px;
     padding-top: 20px;
+}
+
+.color-gray {
+    color: rgb(202, 202, 202)
 }
 
 // .input-validation {

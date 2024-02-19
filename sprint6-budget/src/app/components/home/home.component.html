@@ -1,6 +1,6 @@
 @for ( product of products; track $index) {
 <div class="container-lg services">
-    <div class="container d-flex align-items-center justify-content-between w-75">
+    <div class="container d-flex align-items-center justify-content-between px-5">
         <div>
             <h3>{{product.title}}</h3>
             <p>{{product.description}}</p>
@@ -24,7 +24,7 @@
     }
 
     @if(submitted && total === 0) {
-    <p [class.invalid]="total === 0" class="invalid w-75">You need to choose one service at least!</p>
+    <p [class.invalid]="total === 0" class="invalid">Heu de triar com a mínim un servei!</p>
     }
 </div>
 }
@@ -32,17 +32,18 @@
 
 
 <div class="container-lg services-preu">
-    <div class="container  d-flex  justify-content-end align-items-center">
+    <div class="container  d-flex  justify-content-end align-items-center px-5">
         <h3 class="services-preu--heading">Preu pressuposat:</h3>
         <p class="services-preu--number"><span>{{total}}</span>€</p>
     </div>
 </div>
 
 <div class="container-lg contact d-flex align-items-center flex-column services-contact">
-    <div class="text-start w-75">
+    <div class="text-start px-5 container-lg">
         <h3>Demanar pressupost</h3>
     </div>
-    <form [formGroup]="serviciosForm" class="d-flex align-items-center justify-content-between w-75 gap-2 form-contact">
+    <form [formGroup]="serviciosForm"
+        class="container-lg px-5 d-flex align-items-center justify-content-between gap-2 form-contact">
         <div class="">
             <input type="text" class="form-control" id="nom" placeholder="Nom" formControlName="name">
             @if(serviciosForm.get('name')?.errors?.['required'] && serviciosForm.get('name')?.touched) {
@@ -52,16 +53,20 @@
         <div class="">
             <input type="tel" class="form-control" id="telephone" placeholder="Teléfon" formControlName="telephone">
             @if(serviciosForm.get('telephone')?.errors?.['required'] && serviciosForm.get('telephone')?.touched) {
-            <p class="contact-invalid">Telephone is required</p>
+            <p class="contact-invalid">Número de telèfon necessari</p>
+            }
+            @if(serviciosForm.get('telephone')?.errors?.['telephoneInvalid'] && serviciosForm.get('telephone')?.touched)
+            {
+            <p class="contact-invalid">Número de telèfon invàlid</p>
             }
         </div>
         <div class="">
             <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
             @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched) {
-            <p class="contact-invalid ">Email is required</p>
+            <p class="contact-invalid ">L'Email és necessari</p>
             }
-            @if(serviciosForm.get('email')?.errors?.['email'] && serviciosForm.get('email')?.touched) {
-            <p class="contact-invalid input-validation">Please enter a valid email address</p>
+            @if(serviciosForm.get('email')?.errors?.['emailInvalid'] && serviciosForm.get('email')?.touched) {
+            <p class="contact-invalid input-validation">L'Email no és vàlid</p>
             }
         </div>
         <button (click)="onSubmit()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon
@@ -69,12 +74,12 @@
     </form>
     @if((submitted && serviciosForm.get('name')?.value === "") || (submitted && serviciosForm.get('email')?.value ===
     "")|| (submitted && serviciosForm.get('telephone')?.value === "")) {
-    <p class="contact-invalid">Please complete all fields...</p>
+    <p class="contact-invalid">Si us plau completa els camps necessaris...</p>
     }
 </div>
 
 
-@if(clients.length == 0) {
-<div class="container border-line w-75"></div>
+@if(clients.length > 0) {
+<div class="container-lg border-line px-5"></div>
 <app-budget [clients]="clients"></app-budget>
 }
