@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit {
     let langParam: number = this.serviciosForm.value.languagesNum || 0;
 
 
-    this.router.navigate(['/home'], {
+    this.router.navigate(['/'], {
       queryParams: {
         seo: seoParam,
         web: webParam,
