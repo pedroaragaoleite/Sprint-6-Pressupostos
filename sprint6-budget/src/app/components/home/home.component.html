@@ -13,25 +13,25 @@
         <form class="form-check" [formGroup]="serviciosForm">
             <input class="form-check-input" type="checkbox" value="" (change)="updateCost()"
                 formControlName="checkbox{{$index}}">
-            <label class="form-check-label font-14" >
+            <label class="form-check-label font-14">
                 Afegir
             </label>
-       
+
         </form>
-       
+
         <!-- {{formChecked.value | json}} -->
     </div>
     <div class="container-lg services-invalid">
- @if(submitted && total === 0) {
+        @if(submitted && total === 0) {
         <p class="px-5" [class.invalid]="total === 0" class="px-5">Heu de triar com a mínim un servei!</p>
         }
-    </div >
-   
+    </div>
+
     @if(isChecked && products[$index].title === 'Web') {
     <app-panel [serviciosParentForm]="serviciosForm"></app-panel>
     }
 
-   
+
 </div>
 }
 
@@ -52,47 +52,37 @@
         class="container-lg px-5 d-flex align-items-center justify-content-between gap-2 form-contact">
         <div class="relative">
             <input type="text" class="form-control" id="nom" placeholder="Nom" formControlName="name">
-            @if(serviciosForm.get('name')?.errors?.['required'] && serviciosForm.get('name')?.touched) {
-            <p class="contact-invalid input-validation services-invalid" [class.visibility]="!serviciosForm.valid">Nombre és necesari</p>
+            @if(serviciosForm.get('name')?.hasError('required') && (serviciosForm.get('name')?.touched
+            || submitted)) {
+            <p class="contact-invalid input-validation services-invalid">Nombre és necesari</p>
+
             }
-            @else if(submitted && !serviciosForm.valid) {
-                <p class="contact-invalid input-validation services-invalid">Nombre és necesari</p>
-            }
-            
         </div>
         <div class="">
             <input type="tel" class="form-control" id="telephone" placeholder="Teléfon" formControlName="telephone">
-            @if(serviciosForm.get('telephone')?.errors?.['required'] && serviciosForm.get('telephone')?.touched || serviciosForm.get('telephone')?.errors?.['telephoneInvalid'] && serviciosForm.get('telephone')?.touched) {
-            <p class="contact-invalid services-invalid" >Número de telèfon necessari</p>
+            @if(serviciosForm.get('telephone')?.hasError('telephoneInvalid') && (serviciosForm.get('telephone')?.touched
+            || submitted)) {
+            <p class="contact-invalid input-validation services-invalid">Telefono és necesari</p>
             }
-            @else if(submitted &&  !serviciosForm.valid) {
-                <p class="contact-invalid input-validation services-invalid" >Número de telèfon és necesari</p>
-            }
+
         </div>
         <div class="">
             <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
-            <!-- @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched) {
-            <p class="contact-invalid ">L'Email és necessari</p>
-            } -->
-            @if(serviciosForm.get('email')?.errors?.['required'] && serviciosForm.get('email')?.touched ||
-             serviciosForm.get('email')?.errors?.['emailInvalid']
-            && serviciosForm.get('email')?.touched) {
-            <p class="contact-invalid input-validation services-invalid">L'Email no és vàlid</p>
-            } @else if (submitted && !serviciosForm.valid) {
-                <p class="contact-invalid input-validation services-invalid">L'Email  és necesari</p>
+            @if((serviciosForm.get('email')?.touched || serviciosForm.get('email')?.dirty || submitted) &&
+            serviciosForm.get('email')?.errors) {
+            @if(serviciosForm.get('email')?.errors?.['required']) {
+            <p class="contact-invalid input-validation services-invalid">L'email és necesari</p>
             }
-            <!-- @if(submitted) {
-                <p class="contact-invalid input-validation">L'Email és necesari</p>
-            } -->
+            @if(serviciosForm.get('email')?.hasError('emailInvalid') &&
+            !serviciosForm.get('email')?.errors?.['required']) {
+            <p class="contact-invalid input-validation services-invalid">L'email és invalid</p>
+            }
+            }
         </div>
-        <button (click)="onSubmit()"  type="submit"
-            class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon [icon]="faArrowRight"
-                class="contact-icon"></fa-icon></button>
+
+        <button (click)="onSubmit()" type="submit" class="btn btn-primary contact-btn">Sol-licitar pressupost <fa-icon
+                [icon]="faArrowRight" class="contact-icon"></fa-icon></button>
     </form>
-    <!-- @if((submitted && serviciosForm.get('name')?.value === "") || (submitted && serviciosForm.get('email')?.value ===
-    "")|| (submitted && serviciosForm.get('telephone')?.value === "")) {
-    <p class="contact-invalid">Si us plau completa els camps necessaris...</p>
-    } -->
 </div>
 
 
